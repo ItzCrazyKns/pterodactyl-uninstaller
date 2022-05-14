@@ -2,4 +2,5 @@
 
 set -e
 
-echo 'working'
+
+echo 'working';
