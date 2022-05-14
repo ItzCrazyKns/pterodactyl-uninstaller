@@ -52,37 +52,21 @@ output "This script is not associated with the official Pterodactyl Project."
 
 output
 
-PANEL_UNINSTALLER="$GITHUB_BASE_URL/main/install-panel.sh"
+uninstall_panel(){
+echo"panel";
+}
 
-WINGS_UNINSTALLER="$GITHUB_BASE_URL/main/install-wings.sh"
 
+uninstall_wings(){
+echo"panel";
+}
 
-while [ "$done" == false ]; do
-  options=(
-    "Uninstall the panel"
-    "Uninstall Wings"
-    "Uninstall both [0] and [1] on the same machine (wings Uninstall script runs after panel)\n"
-
-  )
-
-  actions=(
-    "$PANEL_UNINSTALLER"
-    "$WINGS_UNINSTALLER"
-    "$PANEL_UNINSTALLERT;$WINGS_UNINSTALLER"
-  )
-
-  output "What would you like to do?"
-
-  for i in "${!options[@]}"; do
-    output "[$i] ${options[$i]}"
-  done
-
-  echo -n "* Input 0-$((${#actions[@]} - 1)): "
-  read -r action
-
-  [ -z "$action" ] && error "Input is required" && continue
-
-  valid_input=("$(for ((i = 0; i <= ${#actions[@]} - 1; i += 1)); do echo "${i}"; done)")
-  [[ ! " ${valid_input[*]} " =~ ${action} ]] && error "Invalid option"
-  [[ " ${valid_input[*]} " =~ ${action} ]] && done=true && IFS=";" read -r i1 i2 <<<"${actions[$action]}" && execute "$i1" "$i2"
+while true; do
+    read -p "[1] Uninstall Panel
+             [2] Uninstall Wings" 12
+    case $12 in
+        [1]* ) uninstall_panel; break;;
+        [2]* ) uninstall_wings; break;;
+        * ) echo "please answer 1 or 2";;
+    esac
 done
