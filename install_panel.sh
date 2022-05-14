@@ -2,4 +2,4 @@
 
 set -e
 
-output 'working'
+echo 'working'
