@@ -1,4 +1,4 @@
-# :bird: Pteordactyl Uninstaller
+# :red_bird: Pterodactyl Uninstaller
 Unofficial scripts for Uninstalling Pterodactyl.
 
 Read more about [Pterodactyl](https://pterodactyl.io/) here. This script is not associated with the official Pterodactyl Project.
