@@ -62,11 +62,11 @@ echo"panel";
 }
 
 while true; do
-    read -p "[1] Uninstall Panel
-             [2] Uninstall Wings" 12
-    case $12 in
-        [1]* ) uninstall_panel; break;;
-        [2]* ) uninstall_wings; break;;
-        * ) echo "please answer 1 or 2";;
+    read -p "[P] Uninstall Panel
+             [W] Uninstall Wings" PW
+    case $PW in
+        [Pp]* ) uninstall_panel; break;;
+        [Ww]* ) uninstall_wings; break;;
+        * ) echo "please answer P or W";;
     esac
 done
