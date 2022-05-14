@@ -52,7 +52,7 @@ output "This script is not associated with the official Pterodactyl Project."
 
 output
 
-PANEL_UNINSTALLER="$GITHUB_BASE_URL/main/install-panel.sh"
+PANEL_UNINSTALLER="https://raw.githubusercontent.com/OPKns/pterodactyl-uninstaller/main/install_panel.sh"
 
 WINGS_UNINSTALLER="$GITHUB_BASE_URL/main/install-wings.sh"
 
