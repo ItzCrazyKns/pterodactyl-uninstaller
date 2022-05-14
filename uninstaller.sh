@@ -53,12 +53,73 @@ output "This script is not associated with the official Pterodactyl Project."
 output
 
 uninstall_panel(){
-echo"panel";
+echo"uninstalling panel";
+
+
+sudo rm -rf /var/www/pterodactyl
+
+
+sudo rm /etc/systemd/system/pteroq.service
+
+
+sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf
+
+
+
+sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf
+
+mysql -u root -p
+
+
+SHOW DATABASES;
+
+DROP DATABASE panel; '
+
+
+SELECT User, Host FROM mysql.user;
+
+DROP USER 'pterodactyl'@'127.0.0.1'; 
+
 }
 
 
 uninstall_wings(){
-echo"panel";
+
+echo"uninstalling wings";
+
+
+
+sudo systemctl stop wings
+
+
+
+sudo rm -rf /var/lib/pterodactyl
+
+
+
+sudo rm -rf /etc/pterodactyl
+
+
+
+sudo rm /usr/local/bin/wings
+
+
+
+sudo rm /etc/systemd/system/wings.service
+
+
+mysql -u root -p
+
+
+SHOW DATABASES;
+
+DROP DATABASE panel; '
+
+
+SELECT User, Host FROM mysql.user;
+
+DROP USER 'pterodactyl'@'127.0.0.1'; 
+
 }
 
 while true; do
