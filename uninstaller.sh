@@ -127,7 +127,7 @@ while true; do
              [W] Uninstall Wings" PW
     case $PW in
         [Pp]* ) uninstall_panel; break;;
-        [Ww]* ) uninstall_wings; break;;
+[Ww]* ) uninstall_wings; break;;
         * ) echo "please answer P or W";;
     esac
 done
