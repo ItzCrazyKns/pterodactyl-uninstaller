@@ -53,7 +53,7 @@ output "This script is not associated with the official Pterodactyl Project."
 output
 
 uninstall_panel(){
-echo"uninstalling panel";
+echo "uninstalling panel";
 
 
 sudo rm -rf /var/www/pterodactyl
@@ -85,7 +85,7 @@ DROP USER 'pterodactyl'@'127.0.0.1';
 
 uninstall_wings(){
 
-echo"uninstalling wings";
+echo "uninstalling wings";
 
 
 
