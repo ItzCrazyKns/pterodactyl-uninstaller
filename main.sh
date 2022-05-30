@@ -29,7 +29,6 @@ INFORMATIONS="/var/log/Pterodactyl-AutoThemes-informations"
 
 # Update Variables #
 update_variables() {
-ZING="$PTERO/resources/scripts/components/SidePanel.tsx"
 CONFIG_FILE="$PTERO/config/app.php"
 PANEL_VERSION="$(grep "'version'" "$CONFIG_FILE" | cut -c18-25 | sed "s/[',]//g")"
 }
@@ -178,24 +177,16 @@ download_files() {
 print "Downloading files..."
 
 mkdir -p $PTERO/temp
-curl -sSLo $PTERO/temp/ZingTheme.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/ZingTheme/ZingTheme.tar.gz
-tar -xzvf $PTERO/temp/ZingTheme.tar.gz -C $PTERO/temp
-cp -rf -- $PTERO/temp/ZingTheme/* $PTERO
+curl -sSLo $PTERO/temp/Enola.tar.gz https://raw.githubusercontent.com/Ferks-FK/Pterodactyl-AutoThemes/"${SCRIPT_VERSION}"/themes/version1.x/Enola/Enola.tar.gz
+tar -xzvf $PTERO/temp/Enola.tar.gz -C $PTERO/temp
+cp -rf -- $PTERO/temp/Enola/* $PTERO
 rm -rf $PTERO/temp
 }
 
-# Check if it is already installed #
-verify_installation() {
-if [ -f "$ZING" ]; then
-    print_error "This theme is already installed in your panel, aborting..."
-    exit 1
-  else
-    dependencies
-    backup
-    download_files
-    production
-    bye
-fi
+# Configure #
+configure() {
+sed -i "5a\import './user.css';" "$PTERO/resources/scripts/index.tsx"
+sed -i "32a\{!! Theme::css('css/admin.css?t={cache-version}') !!}" "$PTERO/resources/views/layouts/admin.blade.php"
 }
 
 # Panel Production #
@@ -217,7 +208,7 @@ fi
 bye() {
 print_brake 50
 echo
-echo -e "${GREEN}* The theme ${YELLOW}Zing Theme${GREEN} was successfully installed."
+echo -e "${GREEN}* The theme ${YELLOW}Enola${GREEN} was successfully installed."
 echo -e "* A security backup of your panel has been created."
 echo -e "* Thank you for using this script."
 echo -e "* Support group: ${YELLOW}$(hyperlink "$SUPPORT_LINK")${RESET}"
@@ -232,7 +223,12 @@ if [ "$PTERO_INSTALL" == true ]; then
     print "Installation of the panel found, continuing the installation..."
 
     compatibility
-    verify_installation
+    dependencies
+    backup
+    download_files
+    configure
+    production
+    bye
   elif [ "$PTERO_INSTALL" == false ]; then
     print_warning "The installation of your panel could not be located."
     echo -e "* ${GREEN}EXAMPLE${RESET}: ${YELLOW}/var/www/mypanel${RESET}"
@@ -244,10 +240,10 @@ if [ "$PTERO_INSTALL" == true ]; then
         echo "$MANUAL_DIR" >> "$INFORMATIONS/custom_directory.txt"
         update_variables
         compatibility
-        verify_installation
         dependencies
         backup
         download_files
+        configure
         production
         bye
       else
