@@ -272,7 +272,6 @@ find_pterodactyl
 if [ "$PTERO_INSTALL" == true ]; then
     print "Installation of the panel found, continuing the installation..."
 
-    compatibility
     check_conflict
     verify_installation
   elif [ "$PTERO_INSTALL" == false ]; then
