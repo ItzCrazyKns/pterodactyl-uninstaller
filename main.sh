@@ -122,7 +122,18 @@ fi
 update_variables
 }
 
+# Verify Compatibility #
+compatibility() {
+print "Checking if the addon is compatible with your panel..."
 
+sleep 2
+if [ "$PANEL_VERSION" == "1.6.6" ] || [ "$PANEL_VERSION" == "1.8.0" ]; then
+    print "Compatible Version!"
+  else
+    print_error "Incompatible Version!"
+    exit 1
+fi
+}
 
 # Install Dependencies #
 dependencies() {
@@ -272,6 +283,7 @@ find_pterodactyl
 if [ "$PTERO_INSTALL" == true ]; then
     print "Installation of the panel found, continuing the installation..."
 
+    compatibility
     check_conflict
     verify_installation
   elif [ "$PTERO_INSTALL" == false ]; then
@@ -284,6 +296,7 @@ if [ "$PTERO_INSTALL" == true ]; then
         PTERO="$MANUAL_DIR"
         echo "$MANUAL_DIR" >> "$INFORMATIONS/custom_directory.txt"
         update_variables
+        compatibility
         check_conflict
         verify_installation
       else
